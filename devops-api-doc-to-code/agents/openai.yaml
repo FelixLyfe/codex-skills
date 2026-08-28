@@ -1,0 +1,4 @@
+interface:
+  display_name: "DevOps API Doc to Code"
+  short_description: "Extract, audit, and implement API contracts"
+  default_prompt: "Use $devops-api-doc-to-code to normalize this API contract and perform only the requested extract, audit, or implementation work."

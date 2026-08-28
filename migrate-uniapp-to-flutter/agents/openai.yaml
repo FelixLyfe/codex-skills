@@ -1,0 +1,4 @@
+interface:
+  display_name: "Migrate UniApp to Flutter"
+  short_description: "Migrate, repair, or audit UniApp parity"
+  default_prompt: "Use $migrate-uniapp-to-flutter to migrate or repair this UniApp page in the current Flutter repository and verify it through the applicable app or host entry."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "MasterGo to UniApp UI"
+  short_description: "Contract-first MasterGo UI for UniApp"
+  default_prompt: "Use $mastergo-to-uniapp-ui to implement this MasterGo design in the current UniApp project and verify the applicable runtime states."

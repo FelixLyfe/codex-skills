@@ -1,0 +1,4 @@
+interface:
+  display_name: "Flutter macOS Environment Setup"
+  short_description: "Set up and validate Flutter on Apple Silicon macOS"
+  default_prompt: "Use $flutter-macos-env-setup to audit, set up, and validate Flutter iOS and Android development on this Apple Silicon Mac."
