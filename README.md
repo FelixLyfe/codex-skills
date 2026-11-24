@@ -2,7 +2,7 @@
 
 [简体中文](README.zh-CN.md)
 
-This repository contains four Codex skills for API contract integration, Flutter environment setup on Apple Silicon macOS, behavior-parity migration from UniApp to Flutter, and MasterGo design implementation in UniApp.
+This repository contains six Codex skills for API contract integration, Flutter environment setup on Apple Silicon macOS, behavior-parity migration from UniApp to Flutter, MasterGo design implementation in UniApp, workflow design and automation, and agent-context simplification.
 
 Codex can select each skill from its description, or you can invoke one explicitly with `$skill-name`. Explicit invocation is useful when you need to lock the operating mode or edit scope.
 
@@ -39,7 +39,7 @@ npx skills add FelixLyfe/codex-skills \
   -g
 ```
 
-Install all four skills:
+Install all skills:
 
 ```bash
 npx skills add FelixLyfe/codex-skills \
@@ -135,6 +135,49 @@ Use $mastergo-to-uniapp-ui to implement this MasterGo layer in the current UniAp
 Use $mastergo-to-uniapp-ui to fix the spacing, text clipping, and popup keyboard behavior shown in this screenshot. Preserve the current business logic.
 ```
 
+## workflow-anything
+
+Use this skill to turn a user goal into a repeatable workflow with explicit decision rules and acceptance evidence. It supports process design, agents, integrations, and requested recurring or event-driven automation. It does not turn ordinary one-off tasks into automation projects.
+
+It has three deliverables:
+
+- `Design`: a reviewable blueprint and representative case walkthroughs.
+- `Implement`: the authorized workflow, validated in controlled conditions.
+- `Refine`: evidence-based changes to an existing workflow, with affected cases replayed.
+
+The skill reuses existing authorization, makes external effects reviewable before any missing approval, and handles scheduling only when requested. It distinguishes a design, a simulation, a saved configuration, and an observed run.
+
+Example prompts:
+
+```text
+Use $workflow-anything in Design mode to turn our feedback triage process into a workflow. Define source priorities, human handoffs, and acceptance cases without connecting applications.
+```
+
+```text
+Use $workflow-anything to implement this approved workflow. Validate duplicate and partial-failure handling before enabling the requested recurring run.
+```
+
+## simplify-agent-context
+
+Use this skill to reduce the context consumed by project instructions, global rules, and installed skills while preserving user preferences and operational constraints. It also supports a fresh review after a model upgrade.
+
+It has two modes:
+
+- `Audit`: inventory sources and loading conditions, measure their sizes, and propose a `fix / delete / move / rewrite / keep` ledger without changing files.
+- `Apply`: carry out an approved ledger, move content before shortening it, and reconcile every disappeared line with an approved change.
+
+The skill preserves preferences, rejected approaches, environment facts, subtle failure modes, restrictive clauses, irreversible-action rules, and dated decisions. Verification includes pointers and globs, independent retention review, and isolated fresh-session loading checks when those capabilities are available; missing evidence stays explicit.
+
+Example prompts:
+
+```text
+Use $simplify-agent-context in Audit mode to review this project's instructions and the installed skills I use. Propose a change ledger for confirmation; do not edit files.
+```
+
+```text
+Use $simplify-agent-context in Apply mode to execute the approved ledger. Account for removed lines and verify that relocated rules remain reachable.
+```
+
 ## Repository layout
 
 ```text
@@ -144,7 +187,9 @@ codex-skills/
 ├── devops-api-doc-to-code/
 ├── flutter-macos-env-setup/
 ├── migrate-uniapp-to-flutter/
-└── mastergo-to-uniapp-ui/
+├── mastergo-to-uniapp-ui/
+├── workflow-anything/
+└── simplify-agent-context/
 ```
 
 Each skill directory contains `SKILL.md`, `agents/openai.yaml`, and focused resources such as references or deterministic scripts when the workflow needs them. The installer discovers the repository by scanning these `SKILL.md` files.

@@ -2,7 +2,7 @@
 
 [English](README.md)
 
-这个仓库收录四份面向 Codex 的开发 Skill，分别处理 API 契约接入、Apple Silicon macOS 上的 Flutter 环境搭建、UniApp 到 Flutter 的等价迁移，以及 MasterGo 设计在 UniApp 中的实现。
+这个仓库收录六份面向 Codex 的 Skill，分别处理 API 契约接入、Apple Silicon macOS 上的 Flutter 环境搭建、UniApp 到 Flutter 的等价迁移、MasterGo 设计在 UniApp 中的实现、工作流设计与自动化，以及 Agent 上下文精简。
 
 每份 Skill 都支持根据描述自动触发，也可以在提示词中通过 `$skill-name` 显式调用。需要严格控制任务模式或修改范围时，推荐显式调用。
 
@@ -39,7 +39,7 @@ npx skills add FelixLyfe/codex-skills \
   -g
 ```
 
-安装仓库中的四份 Skill：
+安装仓库中的全部 Skill：
 
 ```bash
 npx skills add FelixLyfe/codex-skills \
@@ -135,6 +135,49 @@ npx skills add FelixLyfe/codex-skills \
 使用 $mastergo-to-uniapp-ui，修复截图中标出的间距、文字截断和弹层键盘问题，保持业务逻辑不变。
 ```
 
+## workflow-anything
+
+用于把用户目标整理成可重复执行的工作流，写清判断规则和验收证据。适用于流程设计、Agent、集成，以及用户要求的定时或事件触发自动化；普通一次性代办不会被扩展成自动化项目。
+
+它有三种交付方式：
+
+- `Design`：交付可审阅的流程蓝图和代表性案例推演。
+- `Implement`：在已有授权范围内实现工作流，并通过受控运行验证。
+- `Refine`：依据实际问题改进已有流程，重新验证受影响的案例。
+
+已确认的授权不重复索要。需要新增授权时，先把外部动作及其影响整理成可审阅的结果；只有用户要求时才配置自动触发。方案、模拟、已保存的配置和实际运行结果会分别说明。
+
+调用示例：
+
+```text
+使用 $workflow-anything，以 Design 模式把我们的反馈分拣过程整理成工作流，明确来源优先级、人工接管条件和验收案例，不连接应用。
+```
+
+```text
+使用 $workflow-anything 实施这份已确认的工作流，先验证重复输入和部分失败的处理，再启用已要求的定时运行。
+```
+
+## simplify-agent-context
+
+用于精简项目指令、全局规则和已安装的 Skills 所占用的上下文，同时保留用户偏好和执行约束；也适合模型升级后重新盘点。
+
+它有两种模式：
+
+- `Audit`：只读盘点来源、加载条件和文本大小，按“修 / 删 / 挪 / 改写 / 保留”提出清单，确认前不修改文件。
+- `Apply`：实施已确认的清单，先搬移再压缩，并逐项核对消失的行。
+
+用户偏好、被否掉的方案、环境事实、不易察觉的坑、限制性半句、不可逆操作规则和带日期的决策记录都会保留。验证包含引用与 glob 检查，以及工具条件允许时的独立复核和隔离的新会话加载测试；缺少的验证证据会明确标注。
+
+调用示例：
+
+```text
+使用 $simplify-agent-context，以 Audit 模式盘点这个项目的 Agent 指令和我使用的已安装 Skills，先给出精简清单让我确认，不修改文件。
+```
+
+```text
+使用 $simplify-agent-context，以 Apply 模式执行已确认的清单，逐项核对消失的行，并验证搬移后的规则仍能按需加载。
+```
+
 ## 目录结构
 
 ```text
@@ -144,7 +187,9 @@ codex-skills/
 ├── devops-api-doc-to-code/
 ├── flutter-macos-env-setup/
 ├── migrate-uniapp-to-flutter/
-└── mastergo-to-uniapp-ui/
+├── mastergo-to-uniapp-ui/
+├── workflow-anything/
+└── simplify-agent-context/
 ```
 
 每个 Skill 目录都包含 `SKILL.md`、`agents/openai.yaml`，并按工作流需要提供参考文件或确定性脚本。安装工具会扫描这些目录中的 `SKILL.md`。

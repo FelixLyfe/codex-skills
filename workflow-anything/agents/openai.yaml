@@ -1,0 +1,4 @@
+interface:
+  display_name: "Workflow Anything"
+  short_description: "Design, validate, and implement repeatable workflows"
+  default_prompt: "Use $workflow-anything to turn this goal into a testable workflow and carry out the authorized implementation."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Simplify Agent Context"
+  short_description: "Audit and simplify agent rules without losing intent"
+  default_prompt: "Use $simplify-agent-context to inventory the agent instructions and skills in scope, then propose a change ledger for review before editing files."
